@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Data Example</title>
+</head>
+<body>
+    <h1>Fetch Data Example</h1>
+    <button id="fetchButton">Consultar datos</button>
+    <div id="dataContainer"></div>
+    <p><a href="https://www.google.com.ar">google</a></p>
+    <script>
+        document.getElementById('fetchButton').addEventListener('click', fetchData);
+
+        function fetchData() {
+            fetch('https://localhost:7226/api/Personas')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Do something with the data
+                document.getElementById('dataContainer').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        }
+    </script>
+</body>
+</html>
